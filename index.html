@@ -10,17 +10,16 @@
   <body>
     <header>
       <h1>Drink Recipe Finder</h1>
-      <button class="search-again-button" type="click">Search Again</button>
+      <!-- <button class="search-again-button" type="click">Search Again</button> -->
     </header>
     <main>
       <div id="choose-search-option">
-        <button class="search-by-name"By Name</button>
-        <button class="search-by-ingredient"By Ingredient</button>
+        <button class="search-by-name">By Name</button>
+        <button class="search-by-ingredient">By Ingredient</button>
       </div>
-      <div>
-        <!-- <form class="search-form-page" style="display: none"> -->
-            <form class="search-form-page">
-          <input type="text" name="search-term" placeholder="search here" />
+      <div id="search-area" style="display: none">
+          <form class="search-form-page">
+          <input id="search-input" type="text" name="search-term" placeholder="search here" />
           <button type="submit">Search</button>
         </form>
       </div>
