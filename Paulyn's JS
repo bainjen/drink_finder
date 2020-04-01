@@ -1,0 +1,142 @@
+//Paulyn's
+
+
+var drinksArray; 
+var searchType;
+
+function turnOnBackButton() {
+  $('button#back-btn').on('click', function() {
+    $('form').show();
+    $('#search-results').html('');
+    $('button#back-btn').remove();
+  });
+};
+
+function appendDrinkThumbnail(data) {
+  drinksArray = data.drinks;
+  for (var i = 0; i < drinksArray.length; i++) {
+    $('#search-results').append(`<img id="${drinksArray[i].strDrink}" src="${drinksArray[i].strDrinkThumb}" width="100">`);
+  };
+};
+
+function selectDrink(drinksArray) {
+  $('img').on('click', function() {
+    var drinkName = $(this).attr('id');
+    displayDrinkRecipe(drinkName, drinksArray);
+  });
+};
+
+function displayDrinkRecipe(drinkName, drinksArray) {
+  $('#search-results img').remove();
+
+  for (var i = 0; i < drinksArray.length; i++) {
+    if (drinksArray[i].strDrink === drinkName) {
+      $('#search-results').prepend(`<center><h2>${drinksArray[i].strDrink}</h2></center>`);
+      $('#search-results').prepend(`<img class="drink-recipe-main" src="${drinksArray[i].strDrinkThumb}" width="100">`);
+
+      if (searchType === 'name') {
+        appendRecipe(drinksArray[i]);
+      }
+    };
+  };
+
+  if (searchType === 'ingredient') {
+    $.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drinkName}`, function(data) {
+      appendRecipe(data.drinks[0]);
+    });
+  };
+};
+
+function appendRecipe(recipe) {
+
+  $('#search-results').append(`
+  <p><i>Category:</i><strong> ${recipe.strCategory}</strong></p>
+  <p><strong>${recipe.strAlcoholic}<strong></p>
+  <p><i>Please use a ${recipe.strGlass}.</i></p>
+  <p><i>Instructions:</i> ${recipe.strInstructions}</p>
+  <table>
+    <tr>
+      <th>
+        Ingredient
+      </th>
+      <th>
+        Measurement
+      </th>
+    </tr>
+  </table>
+  `);
+
+  var recipeKeys = Object.keys(recipe);
+  var ingredients = [];
+  var measurements = [];
+
+  for (var i = 0; i < recipeKeys.length; i++) {
+    if (recipeKeys[i].includes('strIngredient')) {
+      ingredients.push(recipeKeys[i])
+    } else if (recipeKeys[i].includes('strMeasure')) {
+      measurements.push(recipeKeys[i])
+    };
+  };
+
+  for (var i = 0; i < ingredients.length; i++) {
+    if (recipe[ingredients[i]]) {
+      $('#search-results table').append(`
+      <tr>
+        <td>
+          ${recipe[ingredients[i]]}
+        </td>
+        <td>
+          ${recipe[measurements[i]]}
+        </td>
+      </tr>
+      `)
+    }
+  }
+};
+
+function hideSearchOptions(searchTypeSelected) {
+  $('#choose-search-option').hide();
+  $('#search-area').show();
+  searchType = searchTypeSelected;
+};
+
+$(document).ready(function() {
+  $('#by-name').on('click', function() {
+    hideSearchOptions('name');
+  });
+
+  $('#by-ingredient').on('click', function() {
+    hideSearchOptions('ingredient');
+  });
+
+  $('button#search').on('click', function(event) {
+    event.preventDefault();
+    var searchInput = $('input').val();
+
+    if (searchInput) {
+      if (searchType === 'name') {
+        $.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchInput}`, function(data) {
+          appendDrinkThumbnail(data);
+          selectDrink(drinksArray);
+        })
+      } else {
+        $.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchInput}&key=1`, function(data) {
+          appendDrinkThumbnail(data);
+          selectDrink(drinksArray);
+        });
+      };
+
+      $('input').val('');
+      $('form').hide();
+      $('#search-results').append('<button id="back-btn">Go Back</button>');
+    } else {
+      $('form').append('<p style="color:red">Please enter something</p>');
+    };
+
+    if ($('p')) {
+      $('p').remove();
+    };
+
+    turnOnBackButton();
+  });
+});

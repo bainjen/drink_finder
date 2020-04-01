@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Include the stylesheet -->
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Shade|Copse|Faster+One|Monoton|Share&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cherry+Swash:700|Darker+Grotesque|Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Drink Recipe Finder</title>
+  </head>
+  <body>
+    <header>
+      <h1>Drink Recipe Finder</h1>
+      <button class="search-again-button" type="click">Search Again</button>
+    </header>
+    <main>
+      <div id="choose-search-option">
+        <button class="search-by-name"By Name</button>
+        <button class="search-by-ingredient"By Ingredient</button>
+      </div>
+      <div>
+        <form class="search-form-page" style="display: none">
+          <input type="text" name="search-term" placeholder="search here" />
+          <button type="submit">Search</button>
+        </form>
+      </div>
+      <div class="search-results-page">
+      </div>
+    </main>
+    <footer>
+      <!-- Add footer content -->
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+/*
+
+  ADD YOUR STYLES HERE
+
+*/
+header {
+  font-family: 'Pacifico' , cursive;
+  font-size: 54px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+body {
+  font-family: 'Darker Grotesque', sans-serif;
+  font-size: 18px;
+  /* background-color: purple; */
+  color: yellow;
+  /* background-image: url(orange-blue-water.JPG); */
+  /* background-image: url(drinks-image.JPG); */
+  /* background-image: url(tiny-drinks.JPG); */
+  background-image: url(white-drinks.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* color: #4d5025; */
+  /* color: #4c4e1a; */
+  /* color: #4c4e1a; */
+  color: #44410e;
+}
+form {
+  display: flex;
+  justify-content: center;
+}
+input {
+  font-family: 'Darker Grotesque', sans-serif;
+  font-size: 34px;
+  background-color: #eaebe4;
+  width: 15vw;
+  border-radius: 8px;
+}
+input:focus {
+  background-color: #f9ea73;
+}
+button{
+  font-family: 'Bungee Shade' , cursive;
+  font-size: 34px;
+  /* background-color: #eddf7c; */
+  background-color: #f9ea73;
+  color: #5f5d3d;
+  margin-left: 1vw;
+  border-radius: 8px;
+  }
+  button:hover {
+  background-color: #8e957a;
+  color: white;
+}
+.search-again-button {
+  width: 25vw;
+  margin: 0;
+}
+.search-results-page {
+  display: flex;
+  justify-content: center;
+}
+.drink-name-and-image {
+display: flex;
+flex-direction: column;
+margin: 5vh
+}
+.drink-image {
+  border-radius: 50%;
+  width: 15vw;
+  border: 8px solid #e8eadf; 
+}
+
+
+/* font-family: 'Cherry Swash', cursive;
+font-family: 'Darker Grotesque', sans-serif; */
+/* font-family: 'Pacifico', cursive; */
+
+/*
+font-family: 'Copse', serif;
+font-family: 'Faster One', cursive;
+font-family: 'Monoton', cursive;
+font-family: 'Bungee Shade', cursive;
+font-family: 'Share', cursive; */
